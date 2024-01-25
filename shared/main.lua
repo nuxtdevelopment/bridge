@@ -58,6 +58,8 @@ CreateThread(function()
             bridge.framework = key
         end
     end
+
+    bridge.logger:inform('Framework:', bridge.framework)
 end)
 
 exports('getObjects', function()
