@@ -6,6 +6,9 @@ description 'Intuitive bridge system for Nuxt Development.'
 version '0.0.1'
 
 shared_script 'shared/*.lua'
-file 'modules/*.lua'
+files {
+    'collections/*.json',
+    'modules/*.lua'
+}
 
 lua54 'yes'

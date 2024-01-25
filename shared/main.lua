@@ -14,7 +14,7 @@ local bridge = setmetatable({
     }
 }, {
     __index = function(table, key)
-        local module = table:require(key)
+        local module = table:require(('%s.%s'):format(key, bridge.isServer and 'server' or 'client')) or table:require(key)
 
         if module then
             return module
@@ -59,7 +59,7 @@ CreateThread(function()
         end
     end
 
-    bridge.logger:inform('Framework:', bridge.framework)
+    bridge.database:createCollectionIfNotExist('am')
 end)
 
 exports('getObjects', function()
