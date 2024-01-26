@@ -1,66 +1,36 @@
-local bridge = setmetatable({
+bridge = {
     isServer = IsDuplicityVersion(),
-    resourceName = GetCurrentResourceName(),
-    modules = {},
     config = {
-        frameworks = {
-            ['esx'] = {
-                resource = 'es_extended'
-            },
-            ['qb'] = {
-                resource = 'admin'
-            }
+        lang = 'en',
+        interface = {
+            style = 'default'
         }
     }
-}, {
-    __index = function(table, key)
-        local module = table:require(('%s.%s'):format(key, bridge.isServer and 'server' or 'client')) or table:require(key)
+}
 
-        if module then
-            return module
-        end
+-------------------------
 
-        return false
-    end
-})
+bridge.logger = {}
 
-function bridge:require(name)
-    if bridge.modules[name] then
-        return bridge.modules[name]()
-    end
+function bridge.logger:inform(text)
+    local formattedText = ('^5[INFORM]^7 %s'):format(text)
 
-    local modulePath = name:gsub('%.', '/')
-
-    if modulePath then
-        local moduleFile = LoadResourceFile(bridge.resourceName, ('modules/%s.lua'):format(modulePath))
-
-        if moduleFile then
-            local module = load(moduleFile)
-
-            if module then
-                bridge.modules[name] = module
-
-                return module()
-            end
-        end
-    end
-
-    return false
+    print(formattedText)
 end
 
-CreateThread(function()
-    -- todo: versiyon kontrolü yapılacak.
+function bridge.logger:success(text)
+    local formattedText = ('^2[SUCCESS]^7 %s'):format(text)
 
-    for key, value in pairs(bridge.config.frameworks) do
-        local resourceState = GetResourceState(value.resource)
+    print(formattedText)
+end
 
-        if resourceState == 'started' then
-            bridge.framework = key
-        end
-    end
+function bridge.logger:error(text)
+    local formattedText = ('^1[ERROR]^7 %s'):format(text)
 
-    bridge.database:createCollectionIfNotExist('am')
-end)
+    print(formattedText)
+end
+
+-- todo: yorum satırları arasında kalan yeri buradan kaldırıp module olarak ekle.
 
 exports('getObjects', function()
     return bridge
