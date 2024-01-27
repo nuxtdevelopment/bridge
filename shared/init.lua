@@ -31,13 +31,8 @@ bridge = setmetatable({
 })
 
 CreateThread(function()
-    local localeFile = LoadResourceFile(bridge.resourceName, ('locales/%s.json'):format(bridge.config.lang))
-
-    if localeFile then
-        bridge.locale = json.decode(localeFile)
-    else
-        bridge.logger:error(('Locale %s does not exist.'):format(bridge.config.lang))
-    end
+    bridge.init:locale()
+    bridge.init:framework()
 
     if bridge.context == 'client' then
         local interfaceData = {
