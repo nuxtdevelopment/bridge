@@ -1,13 +1,9 @@
+-- credit: overextended/ox_lib
+
 bridge = setmetatable({
     name = 'nuxt-bridge',
     resourceName = GetCurrentResourceName(),
-    context = IsDuplicityVersion() and 'server' or 'client',
-    config = {
-        lang = 'en',
-        interface = {
-            style = 'default'
-        }
-    }
+    context = IsDuplicityVersion() and 'server' or 'client'
 }, {
     __index = function(self, key)
         local directory = ('modules/%s'):format(key)
@@ -31,6 +27,7 @@ bridge = setmetatable({
 })
 
 CreateThread(function()
+    bridge.init:config()
     bridge.init:locale()
     bridge.init:framework()
 
@@ -46,5 +43,7 @@ CreateThread(function()
         RegisterNuiCallback('getInterfaceData', function(_, callback)
             callback(interfaceData)
         end)
+    else
+        bridge.version:check()
     end
 end)

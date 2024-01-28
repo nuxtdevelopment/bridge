@@ -1,5 +1,25 @@
 local init = {}
 
+function init:config()
+    local bridgeConfigFile = LoadResourceFile(bridge.name, 'config.json')
+
+    if bridgeConfigFile then
+        bridge.config = json.decode(bridgeConfigFile)
+        
+        local resourceConfigFile = LoadResourceFile(bridge.resourceName, 'config.json')
+
+        if resourceConfigFile then
+            local resourceConfig = json.decode(resourceConfigFile)
+
+            for key, value in pairs(resourceConfig) do
+                bridge.config[key] = value
+            end
+        end
+    else
+        bridge.logger:error('Config not found.')
+    end
+end
+
 function init:locale()
     local localeFile = LoadResourceFile(bridge.resourceName, ('locales/%s.json'):format(bridge.config.lang))
 

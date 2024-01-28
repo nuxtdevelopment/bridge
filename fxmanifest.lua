@@ -8,7 +8,8 @@ version '1.0.0'
 files {
     'collections/*.json',
     'locales/*.json',
-    'modules/**/*.lua'
+    'modules/**/*.lua',
+    'config.json'
 }
 
 shared_script 'shared/*.lua'
