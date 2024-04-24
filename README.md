@@ -1,8 +1,8 @@
 ![Nuxt Logo](https://cdn.dont-ping.me/api/✌️🐭👋🤘👻.png)
 
-# Intuitive Bridge System
+# Intuitive Lib System
 
-Intuitive bridge system for Nuxt Development.
+Intuitive lib system for Nuxt Development.
 
 ## Contact Us
 
