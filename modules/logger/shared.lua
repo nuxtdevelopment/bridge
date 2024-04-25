@@ -1,21 +1,42 @@
 local logger = {}
 
-function logger:inform(text)
-    local formattedText = ('^5[INFORM]^7 %s'):format(text)
+---@param ... any
+function logger:inform(...)
+    local text = table.concat({ ... }, ' ')
 
-    print(formattedText)
+    if text and type(text) == 'string' then
+        local formattedText = ('^5[INFORM]^7 %s'):format(text)
+
+        print(formattedText)
+    else
+        lib.logger:error('34571')
+    end
 end
 
-function logger:success(text)
-    local formattedText = ('^2[SUCCESS]^7 %s'):format(text)
+---@param ... any
+function logger:success(...)
+    local text = table.concat({ ... }, ' ')
 
-    print(formattedText)
+    if text and type(text) == 'string' then
+        local formattedText = ('^2[SUCCESS]^7 %s'):format(text)
+
+        print(formattedText)
+    else
+        lib.logger:error('82842')
+    end
 end
 
-function logger:error(text)
-    local formattedText = ('^1[ERROR]^7 %s'):format(text)
+---@param ... any
+function logger:error(...)
+    local text = table.concat({ ... }, ' ')
 
-    print(formattedText)
+    if text and type(text) == 'string' then
+        local formattedText = ('^1[ERROR]^7 %s'):format(text)
+
+        print(formattedText)
+    else
+        lib.logger:error('09045')
+    end
 end
 
 return logger

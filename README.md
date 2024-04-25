@@ -2,7 +2,7 @@
 
 # Intuitive Lib System
 
-Intuitive lib system for Nuxt Development.
+Intuitive lib system by Nuxt Development.
 
 ## Contact Us
 

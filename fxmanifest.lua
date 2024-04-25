@@ -2,15 +2,15 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'cool0356'
-description 'Intuitive bridge system for Nuxt Development.'
+description 'Intuitive lib system by Nuxt Development.'
 version '1.0.0'
 
 files {
     'collections/*.json',
-    'locales/*.json',
-    'modules/**/*.lua',
-    'config.json'
+    'modules/**/*.lua'
 }
+
+server_script 'server/*.lua'
 
 shared_script 'shared/*.lua'
 
